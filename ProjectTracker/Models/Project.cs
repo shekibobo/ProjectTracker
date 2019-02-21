@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Javax.Xml.Datatype;
-using ProjectTracker.ViewModels;
 
 namespace ProjectTracker.Models
 {
@@ -17,12 +15,13 @@ namespace ProjectTracker.Models
 
     private Segment activeSegment;
 
+    private bool isActive;
     public bool IsActive
     {
-      get { return IsActive; }
+      get => isActive;
       set
       {
-        IsActive = value;
+        isActive = value;
         RaisePropertyChanged(nameof(IsActive));
       }
     }
@@ -49,7 +48,7 @@ namespace ProjectTracker.Models
         return;
       }
 
-      activeSegment.EndTime = stopTime;
+      activeSegment.EndTimeUtc = stopTime;
       activeSegment = null;
 
       IsActive = false;
@@ -57,7 +56,7 @@ namespace ProjectTracker.Models
 
     public void Tick(DateTime dateTime)
     {
-      TotalDurationSeconds = (int)segments.Sum(segment => (segment.EndTime ?? dateTime).Subtract(segment.StartTime).TotalSeconds);
+      TotalDurationSeconds = (int)segments.Sum(segment => (segment.EndTimeUtc ?? dateTime).Subtract(segment.StartTimeUtc).TotalSeconds);
     }
   }
 }

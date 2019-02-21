@@ -4,12 +4,12 @@ namespace ProjectTracker.Models
 {
   internal class Segment
   {
-    public Segment(DateTime startTime)
+    public Segment(DateTime startTimeUtc)
     {
-      StartTime = startTime;
+      StartTimeUtc = startTimeUtc;
     }
 
-    public System.DateTime StartTime { get; set; }
-    public System.DateTime? EndTime { get; set; }
+    public System.DateTime StartTimeUtc { get; set; }
+    public System.DateTime? EndTimeUtc { get; set; }
   }
 }
