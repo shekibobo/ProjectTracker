@@ -13,4 +13,7 @@
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectTracker\ProjectTracker.csproj" />
+  </ItemGroup>
 </Project>
