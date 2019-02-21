@@ -26,7 +26,16 @@ namespace ProjectTracker.Models
       }
     }
 
-    public int TotalDurationSeconds { get; set; }
+    private int totalDurationSeconds;
+    public int TotalDurationSeconds
+    {
+      get => totalDurationSeconds;
+      set
+      {
+        totalDurationSeconds = value;
+        RaisePropertyChanged(nameof(TotalDurationSeconds));
+      }
+    }
 
     private List<Segment> segments = new List<Segment>();
 

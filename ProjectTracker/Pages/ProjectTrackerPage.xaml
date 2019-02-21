@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:converters="clr-namespace:ProjectTracker.Converters"
+  x:Class="ProjectTracker.Pages.ProjectTrackerPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:BoolToColorConverter
+        x:Key="activeProjectTextColor"
+        TrueColor="Green"
+        FalseColor="Black" />
+      <converters:DurationValueConverter
+        x:Key="duration" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <StackLayout
+      Padding="10">
+      <Entry
+        x:Name="NewProjectName"
+        Text="{Binding NewProjectName}"
+        HorizontalOptions="FillAndExpand"
+        Placeholder="New Project Name" />
+      <Button
+        Text="Add Project"
+        Command="{Binding AddCommand}"
+        HorizontalOptions="FillAndExpand" />
+      <Button
+        Text="Reset"
+        Command="{Binding ResetCommand}"
+        HorizontalOptions="FillAndExpand" />
+      <ListView
+        x:Name="Projects"
+        ItemsSource="{Binding Projects}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <TextCell
+              Text="{Binding Name}"
+              TextColor="{Binding IsActive, Converter={StaticResource activeProjectTextColor}}"
+              Detail="{Binding TotalDurationSeconds, Converter={StaticResource duration}}"
+              DetailColor="{Binding IsActive, Converter={StaticResource activeProjectTextColor}}" />
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

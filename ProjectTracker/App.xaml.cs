@@ -1,4 +1,5 @@
 ﻿using System;
+using ProjectTracker.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace ProjectTracker
     {
       InitializeComponent();
 
-      MainPage = new MainPage();
+      MainPage = new ProjectTrackerPage();
     }
 
     protected override void OnStart()
