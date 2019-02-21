@@ -19,7 +19,7 @@ namespace ProjectTracker.ViewModels
       ToggleProjectCommand = new Command<Project>(toggleProject);
 
       timer.Start(TimeSpan.FromSeconds(1));
-      timer.Elapsed += (sender, tickUtc) => currentProject.Tick(tickUtc);
+      timer.Elapsed += (sender, tickUtc) => currentProject?.Tick(tickUtc);
     }
 
     public ICommand AddCommand { get; }
@@ -60,7 +60,22 @@ namespace ProjectTracker.ViewModels
 
     private void toggleProject(Project project)
     {
-      throw new NotImplementedException();
+      if (project == currentProject)
+      {
+        currentProject.StopTracking(timer.UtcNow);
+        currentProject = null;
+      }
+      else if (currentProject != null) 
+      {
+        currentProject.StopTracking(timer.UtcNow);
+        currentProject = project;
+        currentProject.StartTracking(timer.UtcNow);
+      }
+      else
+      {
+        currentProject = project;
+        currentProject.StartTracking(timer.UtcNow);
+      }
     }
 
     private void reset(object project)

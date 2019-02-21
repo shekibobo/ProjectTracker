@@ -49,6 +49,7 @@ namespace ProjectTracker.Models
       }
 
       activeSegment.EndTimeUtc = stopTime;
+      Tick(stopTime);
       activeSegment = null;
 
       IsActive = false;

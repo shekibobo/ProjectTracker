@@ -13,7 +13,7 @@ namespace ProjectTracker.Tests.Mocks
       set
       {
         utcNow = value;
-        Elapsed.Invoke(this, UtcNow);
+        Elapsed?.Invoke(this, utcNow);
       }
     }
 
@@ -29,6 +29,11 @@ namespace ProjectTracker.Tests.Mocks
     public void AdvanceSeconds(int seconds)
     {
       UtcNow = UtcNow.AddSeconds(seconds);
+    }
+
+    public void AdvanceSecondsSecretly(int seconds)
+    {
+      utcNow = UtcNow.AddSeconds(seconds);
     }
   }
 }
